@@ -3,7 +3,7 @@
 ## INSTALL
 
 ```bash
-yarn
+yarn setup
 ```
 
 ## TEST
