@@ -19,6 +19,8 @@
   "devDependencies": {
     "@codechecks/client": "^0.1.10",
     "@ethersproject/wallet": "^5.0.5",
+    "@lavamoat/allow-scripts": "^1.0.4",
+    "@lavamoat/preinstall-always-fail": "^1.0.0",
     "@openzeppelin/contracts": "^3.2.1-solc-0.7",
     "@typechain/ethers-v5": "^6.0.0",
     "@types/chai": "^4.2.11",
@@ -51,7 +53,7 @@
     "typescript": "^4.0.5"
   },
   "scripts": {
-    "postinstall": "node ./.setup.js",
+    "setup": "yarn install --ignore-scripts && yarn allow-scripts && node ./.setup.js",
     "lint": "eslint \"**/*.{js,ts}\" && solhint src/**/*.sol",
     "lint:fix": "eslint --fix \"**/*.{js,ts}\" && solhint --fix src/**/*.sol",
     "format": "prettier --check \"**/*.{ts,js,sol}\"",
@@ -81,5 +83,18 @@
     "mainnet:deploy": "hardhat --network mainnet deploy",
     "mainnet:export": "hardhat --network mainnet export",
     "mainnet:run": "cross-env HARDHAT_NETWORK=mainnet ts-node --files"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "template-ethereum-contracts": false,
+      "keccak": false,
+      "secp256k1": false,
+      "web3": false,
+      "bufferutil": false,
+      "utf-8-validate": false,
+      "core-js-pure": false,
+      "core-js": false,
+      "@lavamoat/preinstall-always-fail": false
+    }
   }
 }
