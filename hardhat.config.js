@@ -1,13 +1,11 @@
 import 'dotenv/config';
-import {HardhatUserConfig} from 'hardhat/types';
 import 'hardhat-deploy';
 import 'hardhat-deploy-ethers';
 import 'hardhat-gas-reporter';
-import 'hardhat-typechain';
 import 'solidity-coverage';
 import {node_url, accounts} from './utils/network';
 
-const config: HardhatUserConfig = {
+const config = {
   solidity: {
     version: '0.7.1',
   },

@@ -1,6 +1,5 @@
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
@@ -8,11 +7,8 @@ module.exports = {
   env: {
     commonjs: true,
   },
-  plugins: ['@typescript-eslint'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
-  ],
+  extends: ['eslint:recommended', 'plugin:node/recommended', 'prettier'],
+  rules: {
+    'node/no-unsupported-features/es-syntax': 'disabled',
+  },
 };

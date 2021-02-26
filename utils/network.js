@@ -1,5 +1,5 @@
 import 'dotenv/config';
-export function node_url(networkName: string): string {
+export function node_url(networkName) {
   if (networkName) {
     const uri = process.env['ETH_NODE_URI_' + networkName.toUpperCase()];
     if (uri && uri !== '') {
@@ -23,7 +23,7 @@ export function node_url(networkName: string): string {
   return uri;
 }
 
-export function getMnemonic(networkName?: string): string {
+export function getMnemonic(networkName) {
   if (networkName) {
     const mnemonic = process.env['MNEMONIC_' + networkName.toUpperCase()];
     if (mnemonic && mnemonic !== '') {
@@ -38,6 +38,6 @@ export function getMnemonic(networkName?: string): string {
   return mnemonic;
 }
 
-export function accounts(networkName?: string): {mnemonic: string} {
+export function accounts(networkName) {
   return {mnemonic: getMnemonic(networkName)};
 }

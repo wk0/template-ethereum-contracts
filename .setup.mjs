@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-const fs = require('fs');
+import fs from 'fs';
+
 function copyFromDefault(p) {
   if (!fs.existsSync(p)) {
     const defaultFile = `${p}.default`;
