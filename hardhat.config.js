@@ -1,9 +1,9 @@
-import 'dotenv/config';
-import 'hardhat-deploy';
-import 'hardhat-deploy-ethers';
-import 'hardhat-gas-reporter';
-import 'solidity-coverage';
-import {node_url, accounts} from './utils/network';
+require('dotenv').config();
+require('hardhat-deploy');
+require('hardhat-deploy-ethers');
+require('hardhat-gas-reporter');
+require('solidity-coverage');
+const {node_url, accounts} = require('./utils/network');
 
 const config = {
   solidity: {
@@ -56,4 +56,4 @@ const config = {
   },
 };
 
-export default config;
+module.exports = config;

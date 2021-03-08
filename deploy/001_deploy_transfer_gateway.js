@@ -10,5 +10,5 @@ const func = async function (hre) {
     deterministicDeployment: true,
   });
 };
-export default func;
+module.exports = func;
 func.tags = ['ERC20TransferGateway'];

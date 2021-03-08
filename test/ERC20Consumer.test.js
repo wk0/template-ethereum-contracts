@@ -1,5 +1,5 @@
-import {expect} from './chai-setup.js';
-import {ethers, deployments, getUnnamedAccounts} from 'hardhat';
+const {expect} = require('./chai-setup.js');
+const {ethers, deployments, getUnnamedAccounts} = require('hardhat');
 
 const setup = deployments.createFixture(async () => {
   await deployments.fixture('ERC20Consumer');
