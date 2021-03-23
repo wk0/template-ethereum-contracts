@@ -35,4 +35,4 @@ jobs:
         run: yarn format
 
       - name: Running tests
-        run: yarn test
+        run: yarn fork:test mainnet --blockNumber 12068742
