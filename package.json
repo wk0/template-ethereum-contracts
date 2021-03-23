@@ -17,6 +17,7 @@
     "websocket": "1.0.32"
   },
   "devDependencies": {
+    "@aave/protocol-v2": "^1.0.1",
     "@ethersproject/wallet": "^5.0.5",
     "@openzeppelin/contracts": "4.0.0-rc.0",
     "@typechain/ethers-v5": "^6.0.0",

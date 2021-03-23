@@ -14,6 +14,7 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: 0,
     simpleERC20Beneficiary: 1,
+    daiHolder: '0xf977814e90da44bfa03b6295a0616a897441acec',
   },
   networks: {
     hardhat: {
@@ -67,15 +68,20 @@ const config: HardhatUserConfig = {
   mocha: {
     timeout: 0,
   },
-  external: process.env.HARDHAT_FORK
-    ? {
-        deployments: {
+  external: {
+    contracts: [
+      {
+        artifacts: 'node_modules/@aave/protocol-v2/artifacts',
+      },
+    ],
+    deployments: process.env.HARDHAT_FORK
+      ? {
           // process.env.HARDHAT_FORK will specify the network that the fork is made from.
           // this line allow it to fetch the deployments from the network being forked from
           hardhat: ['deployments/' + process.env.HARDHAT_FORK],
-        },
-      }
-    : undefined,
+        }
+      : undefined,
+  },
 };
 
 export default config;
