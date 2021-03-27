@@ -28,6 +28,7 @@ const config: HardhatUserConfig = {
               : undefined,
           }
         : undefined,
+      deploy: ['deploy', 'test/deploy'],
     },
     localhost: {
       url: node_url('localhost'),
