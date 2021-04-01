@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import {HardhatUserConfig} from 'hardhat/types';
+import '@nomiclabs/hardhat-vyper';
 import 'hardhat-deploy';
 import 'hardhat-deploy-ethers';
 import 'hardhat-gas-reporter';
@@ -10,6 +11,9 @@ import {node_url, accounts} from './utils/network';
 const config: HardhatUserConfig = {
   solidity: {
     version: '0.7.6',
+  },
+  vyper: {
+    version: '0.1.0b9',
   },
   namedAccounts: {
     deployer: 0,
