@@ -12,18 +12,19 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     simpleERC20Beneficiary,
   } = await getNamedAccounts();
 
-  await deploy('Proxy01', {
+  await deploy('SimpleERC20', {
     contract: 'SimpleERC20',
     from: deployer,
     args: [simpleERC20Beneficiary, parseEther('1000000000')],
     proxy: {
       owner: proxy01Owner,
       proxyContract: 'OpenZeppelinTransparentProxy',
+      methodName: 'init',
     },
     log: true,
   });
 
-  await deploy('Proxy01', {
+  await deploy('SimpleERC20', {
     contract: 'SimpleERC20_v2',
     from: proxy01Owner,
     args: [simpleERC20Beneficiary, parseEther('1000000000')],
@@ -35,4 +36,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 };
 export default func;
-func.tags = ['Proxy01'];
+func.tags = ['SimpleERC20'];
