@@ -1,4 +1,4 @@
-# Boilerplate for ethereum solidity smart contract development
+# optimism demo
 
 ## INSTALL
 
@@ -10,6 +10,37 @@ yarn
 
 ```bash
 yarn test
+```
+
+## DEPLOY
+
+You first need to ensure you have an L1 and L2 chain running.
+For that checkout : https://github.com/ethereum-optimism/optimism-integration
+
+We then deploy the ERC20 contract on localhost (L1)
+
+```bash
+yarn deploy localhost
+```
+
+And then deploy the necessary contract for bridging (L1 bridge + L2 ERC20 )
+
+```bash
+yarn deploy optimism
+```
+
+## DEMO
+
+First we setup an account with some token
+
+```bash
+yarn execute localhost scripts/setup_user.ts
+```
+
+And then we make it deposit and withdraw
+
+```bash
+yarn execute optimism scripts/deposit-withdraw.ts
 ```
 
 ## SCRIPTS

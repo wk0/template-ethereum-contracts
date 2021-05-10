@@ -15,4 +15,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 };
 export default func;
-func.tags = ['SimpleERC20'];
+func.tags = ['SimpleERC20', 'SimpleERC20_deploy'];

@@ -1,5 +1,7 @@
 cache/
 artifacts/
+cache-ovm/
+artifacts-ovm/
 
 coverage*
 typechain/
@@ -18,3 +20,4 @@ yalc.lock
 contractsInfo.json
 deployments/hardhat
 deployments/localhost
+deployments/optimism

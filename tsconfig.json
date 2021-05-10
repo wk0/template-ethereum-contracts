@@ -13,6 +13,8 @@
     "./scripts",
     "./deploy",
     "./test",
-    "typechain/**/*"
+    "typechain/**/*",
+    "deploy_l1/001_deploy_simple_erc20.ts",
+    "defs.d.ts"
   ]
 }
