@@ -12,6 +12,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const MyL2DepositedERC20 = await hre.deployments.get('SimpleERC20_OVM'); // from Layer 2
 
   // TODO type check: any ?
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const OVM_L1ERC20Gateway = (optimism as any).getContractDefinition(
     'OVM_L1ERC20Gateway'
   );
