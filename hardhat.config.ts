@@ -12,7 +12,11 @@ const config: HardhatUserConfig = {
     version: '0.7.6',
   },
   namedAccounts: {
-    deployer: 0,
+    deployer: {
+      default: 0,
+      rinkeby:
+        'safe://0x61c461EcC993aaDEB7e4b47E96d1B8cC37314B20:0x59f134920F80F22b2f11D6bB3ae90cA2fD5CE201',
+    },
     simpleERC20Beneficiary: 1,
   },
   networks: {
