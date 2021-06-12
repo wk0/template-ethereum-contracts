@@ -24,21 +24,20 @@ async function showBalance(testUser: string) {
 }
 
 async function main() {
-  const {
-    l1Messenger: l1MessengerAddress,
-  } = await companionNetworks.l1.getNamedAccounts();
+  const {l1Messenger: l1MessengerAddress} =
+    await companionNetworks.l1.getNamedAccounts();
   const {l2Messenger: l2MessengerAddress, testUser} = await getNamedAccounts();
 
   const watcher = new Watcher({
     l1: {
       provider: new Web3Provider(
-        (companionNetworks.l1.provider as unknown) as ExternalProvider
+        companionNetworks.l1.provider as unknown as ExternalProvider
       ),
       messengerAddress: l1MessengerAddress,
     },
     l2: {
       provider: new Web3Provider(
-        (network.provider as unknown) as ExternalProvider
+        network.provider as unknown as ExternalProvider
       ),
       messengerAddress: l2MessengerAddress,
     },
