@@ -5,7 +5,6 @@ import {
   getUnnamedAccounts,
   getNamedAccounts,
 } from 'hardhat';
-import {Contract} from 'ethers';
 import {IERC20} from '../typechain';
 import {setupUser, setupUsers} from './utils';
 

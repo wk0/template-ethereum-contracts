@@ -18,12 +18,14 @@ import {Abs_L2DepositedToken} from "@eth-optimism/contracts/build/contracts/OVM/
  * Compiler used: optimistic-solc
  * Runtime target: OVM
  */
+// solhint-disable-next-line contract-name-camelcase
 contract SimpleERC20_OVM is Abs_L2DepositedToken, ERC20Base, WithPermitAndFixedDomain {
     constructor(address _l2CrossDomainMessenger)
         Abs_L2DepositedToken(_l2CrossDomainMessenger)
         WithPermitAndFixedDomain("1")
+    // solhint-disable-next-line no-empty-blocks
     {
-        //
+
     }
 
     string public constant symbol = "ovmSIMPLE";
@@ -32,6 +34,7 @@ contract SimpleERC20_OVM is Abs_L2DepositedToken, ERC20Base, WithPermitAndFixedD
         return "OVM Simple ERC20";
     }
 
+    // solhint-disable-next-line no-unused-vars
     function _handleInitiateWithdrawal(address _to, uint256 _amount) internal override {
         _burnFrom(msg.sender, _amount);
     }
