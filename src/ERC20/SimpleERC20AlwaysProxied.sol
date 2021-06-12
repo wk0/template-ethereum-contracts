@@ -7,6 +7,7 @@ import "./WithPermitAndFixedDomain.sol";
 import "hardhat-deploy/solc_0.7/proxy/Proxied.sol";
 
 contract SimpleERC20AlwaysProxied is ERC20Base, WithPermitAndFixedDomain, Proxied {
+    // solhint-disable-next-line no-empty-blocks
     constructor() WithPermitAndFixedDomain("1") {}
 
     function init(address to, uint256 amount) public proxied {
