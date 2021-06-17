@@ -9,6 +9,11 @@ import '@eth-optimism/plugins/hardhat/compiler';
 import * as hdnode from '@ethersproject/hdnode';
 import {node_url, accounts} from './utils/network';
 
+// While waiting for hardhat PR: https://github.com/nomiclabs/hardhat/pull/1542
+if (process.env.HARDHAT_FORK) {
+  process.env['HARDHAT_DEPLOY_FORK'] = process.env.HARDHAT_FORK;
+}
+
 const config: HardhatUserConfig = {
   solidity: {
     version: '0.7.6',
@@ -37,6 +42,7 @@ const config: HardhatUserConfig = {
       accounts: accounts(process.env.HARDHAT_FORK),
       forking: process.env.HARDHAT_FORK
         ? {
+            // TODO once PR merged : network: process.env.HARDHAT_FORK,
             url: node_url(process.env.HARDHAT_FORK),
             blockNumber: process.env.HARDHAT_FORK_NUMBER
               ? parseInt(process.env.HARDHAT_FORK_NUMBER)
@@ -110,16 +116,6 @@ const config: HardhatUserConfig = {
   mocha: {
     timeout: 0,
   },
-  external: process.env.HARDHAT_FORK
-    ? {
-        deployments: {
-          // process.env.HARDHAT_FORK will specify the network that the fork is made from.
-          // these lines allow it to fetch the deployments from the network being forked from both for node and deploy task
-          hardhat: ['deployments/' + process.env.HARDHAT_FORK],
-          localhost: ['deployments/' + process.env.HARDHAT_FORK],
-        },
-      }
-    : undefined,
 };
 
 export default config;
