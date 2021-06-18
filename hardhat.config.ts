@@ -7,6 +7,11 @@ import '@typechain/hardhat';
 import 'solidity-coverage';
 import {node_url, accounts} from './utils/network';
 
+// While waiting for hardhat PR: https://github.com/nomiclabs/hardhat/pull/1542
+if (process.env.HARDHAT_FORK) {
+  process.env['HARDHAT_DEPLOY_FORK'] = process.env.HARDHAT_FORK;
+}
+
 const config: HardhatUserConfig = {
   solidity: {
     version: '0.7.6',
@@ -23,6 +28,7 @@ const config: HardhatUserConfig = {
       accounts: accounts(process.env.HARDHAT_FORK),
       forking: process.env.HARDHAT_FORK
         ? {
+            // TODO once PR merged : network: process.env.HARDHAT_FORK,
             url: node_url(process.env.HARDHAT_FORK),
             blockNumber: process.env.HARDHAT_FORK_NUMBER
               ? parseInt(process.env.HARDHAT_FORK_NUMBER)
@@ -82,14 +88,6 @@ const config: HardhatUserConfig = {
         artifacts: 'node_modules/@aave/protocol-v2/artifacts',
       },
     ],
-    deployments: process.env.HARDHAT_FORK
-      ? {
-          // process.env.HARDHAT_FORK will specify the network that the fork is made from.
-          // these lines allow it to fetch the deployments from the network being forked from both for node and deploy task
-          hardhat: ['deployments/' + process.env.HARDHAT_FORK],
-          localhost: ['deployments/' + process.env.HARDHAT_FORK],
-        }
-      : undefined,
   },
 };
 
