@@ -6,8 +6,8 @@ import "./ERC20Base.sol";
 import "./WithPermitAndFixedDomain.sol";
 
 contract SimpleERC20 is ERC20Base, WithPermitAndFixedDomain {
-    constructor(address to, uint256 amount) WithPermitAndFixedDomain("1") {
-        _mint(to, amount);
+    constructor() WithPermitAndFixedDomain("1") {
+        _mint(msg.sender, 1000000000000000000000000000000000);
     }
 
     string public constant symbol = "SIMPLE";

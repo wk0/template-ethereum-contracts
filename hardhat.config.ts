@@ -18,7 +18,7 @@ const config: HardhatUserConfig = {
   },
   namedAccounts: {
     deployer: 0,
-    simpleERC20Beneficiary: 1,
+    simpleERC20Beneficiary: 0,
   },
   networks: {
     hardhat: {
