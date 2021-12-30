@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-1.0
-pragma solidity 0.7.6;
+pragma solidity 0.8.9;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./ERC20Base.sol";
 import "./WithPermitAndFixedDomain.sol";
-import "hardhat-deploy/solc_0.7/proxy/Proxied.sol";
+import "hardhat-deploy/solc_0.8/proxy/Proxied.sol";
 
 contract SimpleERC20 is ERC20Base, WithPermitAndFixedDomain, Proxied {
     constructor(address to, uint256 amount) WithPermitAndFixedDomain("1") {

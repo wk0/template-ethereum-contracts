@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const {spawn} = require('child_process');
+const path = require('path');
 require('dotenv').config();
 
 const commandlineArgs = process.argv.slice(2);
@@ -27,9 +28,7 @@ function parseArgs(rawArgs, numFixedArgs, expectedOptions) {
         }
       } else {
         if (fixedArgs.length < numFixedArgs) {
-          throw new Error(
-            `expected ${numFixedArgs} fixed args, got only ${fixedArgs.length}`
-          );
+          throw new Error(`expected ${numFixedArgs} fixed args, got only ${fixedArgs.length}`);
         } else {
           extra.push(rawArg);
         }
@@ -68,37 +67,37 @@ async function performAction(rawArgs) {
   const args = rawArgs.slice(1);
   if (firstArg === 'run') {
     const {fixedArgs, extra} = parseArgs(args, 2, {});
+    let filepath = fixedArgs[1];
+    const folder = path.basename(__dirname);
+    if (filepath.startsWith(folder + '/') || filepath.startsWith(folder + '\\')) {
+      filepath = filepath.slice(folder.length + 1);
+    }
     await execute(
-      `cross-env HARDHAT_DEPLOY_LOG=true HARDHAT_NETWORK=${
-        fixedArgs[0]
-      } ts-node --files ${fixedArgs[1]} ${extra.join(' ')}`
+      `cross-env HARDHAT_DEPLOY_LOG=true HARDHAT_NETWORK=${fixedArgs[0]} ts-node --files ${filepath} ${extra.join(' ')}`
     );
   } else if (firstArg === 'deploy') {
     const {fixedArgs, extra} = parseArgs(args, 1, {});
-    await execute(
-      `hardhat --network ${fixedArgs[0]} deploy ${extra.join(' ')}`
-    );
+    await execute(`hardhat --network ${fixedArgs[0]} deploy ${extra.join(' ')}`);
   } else if (firstArg === 'export') {
     const {fixedArgs} = parseArgs(args, 2, {});
-    await execute(
-      `hardhat --network ${fixedArgs[0]} export --export ${fixedArgs[1]}`
-    );
+    await execute(`hardhat --network ${fixedArgs[0]} export --export ${fixedArgs[1]}`);
   } else if (firstArg === 'fork:run') {
     const {fixedArgs, options, extra} = parseArgs(args, 2, {
       deploy: 'boolean',
       blockNumber: 'string',
       'no-impersonation': 'boolean',
     });
+    let filepath = fixedArgs[1];
+    const folder = path.basename(__dirname);
+    if (filepath.startsWith(folder + '/') || filepath.startsWith(folder + '\\')) {
+      filepath = filepath.slice(folder.length + 1);
+    }
     await execute(
-      `cross-env ${
-        options.deploy ? 'HARDHAT_DEPLOY_FIXTURE=true' : ''
-      } HARDHAT_DEPLOY_LOG=true HARDHAT_FORK=${fixedArgs[0]} ${
-        options.blockNumber ? `HARDHAT_FORK_NUMBER=${options.blockNumber}` : ''
-      } ${
-        options['no-impersonation']
-          ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true`
-          : ''
-      } ts-node --files ${fixedArgs[1]} ${extra.join(' ')}`
+      `cross-env ${options.deploy ? 'HARDHAT_DEPLOY_FIXTURE=true' : ''} HARDHAT_DEPLOY_LOG=true HARDHAT_FORK=${
+        fixedArgs[0]
+      } ${options.blockNumber ? `HARDHAT_FORK_NUMBER=${options.blockNumber}` : ''} ${
+        options['no-impersonation'] ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true` : ''
+      } ts-node --files ${filepath} ${extra.join(' ')}`
     );
   } else if (firstArg === 'fork:deploy') {
     const {fixedArgs, options, extra} = parseArgs(args, 1, {
@@ -108,11 +107,7 @@ async function performAction(rawArgs) {
     await execute(
       `cross-env HARDHAT_FORK=${fixedArgs[0]} ${
         options.blockNumber ? `HARDHAT_FORK_NUMBER=${options.blockNumber}` : ''
-      } ${
-        options['no-impersonation']
-          ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true`
-          : ''
-      } hardhat deploy ${extra.join(' ')}`
+      } ${options['no-impersonation'] ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true` : ''} hardhat deploy ${extra.join(' ')}`
     );
   } else if (firstArg === 'fork:node') {
     const {fixedArgs, options, extra} = parseArgs(args, 1, {
@@ -123,10 +118,8 @@ async function performAction(rawArgs) {
       `cross-env HARDHAT_FORK=${fixedArgs[0]} ${
         options.blockNumber ? `HARDHAT_FORK_NUMBER=${options.blockNumber}` : ''
       } ${
-        options['no-impersonation']
-          ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true`
-          : ''
-      } hardhat node ${extra.join(' ')}`
+        options['no-impersonation'] ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true` : ''
+      } hardhat node --hostname 0.0.0.0 ${extra.join(' ')}`
     );
   } else if (firstArg === 'fork:test') {
     const {fixedArgs, options, extra} = parseArgs(args, 1, {
@@ -137,12 +130,8 @@ async function performAction(rawArgs) {
       `cross-env HARDHAT_FORK=${fixedArgs[0]} ${
         options.blockNumber ? `HARDHAT_FORK_NUMBER=${options.blockNumber}` : ''
       } ${
-        options['no-impersonation']
-          ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true`
-          : ''
-      } HARDHAT_DEPLOY_FIXTURE=true HARDHAT_COMPILE=true mocha --bail --recursive test ${extra.join(
-        ' '
-      )}`
+        options['no-impersonation'] ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true` : ''
+      } HARDHAT_DEPLOY_FIXTURE=true HARDHAT_COMPILE=true mocha --bail --recursive test ${extra.join(' ')}`
     );
   } else if (firstArg === 'fork:dev') {
     const {fixedArgs, options, extra} = parseArgs(args, 1, {
@@ -153,11 +142,12 @@ async function performAction(rawArgs) {
       `cross-env HARDHAT_FORK=${fixedArgs[0]} ${
         options.blockNumber ? `HARDHAT_FORK_NUMBER=${options.blockNumber}` : ''
       } ${
-        options['no-impersonation']
-          ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true`
-          : ''
-      } hardhat node --watch --export contractsInfo.json ${extra.join(' ')}`
+        options['no-impersonation'] ? `HARDHAT_DEPLOY_NO_IMPERSONATION=true` : ''
+      } hardhat node --hostname 0.0.0.0 --watch --export contractsInfo.json ${extra.join(' ')}`
     );
+  } else if (firstArg === 'tenderly:push') {
+    const {fixedArgs} = parseArgs(args, 1, {});
+    await execute(`hardhat --network ${fixedArgs[0]} tenderly:push`);
   }
 }
 
