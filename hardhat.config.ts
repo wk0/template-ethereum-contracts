@@ -25,6 +25,8 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: 0,
     simpleERC20Beneficiary: 1,
+    uniswap_deployer: 'deployer',
+    uniswap_feeToSetter: 2,
   },
   networks: addForkConfiguration({
     hardhat: {
@@ -76,16 +78,26 @@ const config: HardhatUserConfig = {
   mocha: {
     timeout: 0,
   },
-  external: process.env.HARDHAT_FORK
-    ? {
-        deployments: {
+  external: {
+    deployments: process.env.HARDHAT_FORK
+      ? {
           // process.env.HARDHAT_FORK will specify the network that the fork is made from.
           // these lines allow it to fetch the deployments from the network being forked from both for node and deploy task
           hardhat: ['deployments/' + process.env.HARDHAT_FORK],
           localhost: ['deployments/' + process.env.HARDHAT_FORK],
-        },
-      }
-    : undefined,
+        }
+      : undefined,
+    contracts: [
+      {
+        artifacts: [
+          'node_modules/hardhat-deploy-uniswap-v2/export/artifacts',
+          'node_modules/@uniswap/v2-core/build',
+          'node_modules/@uniswap/v2-periphery/build',
+        ],
+        deploy: 'node_modules/hardhat-deploy-uniswap-v2/export/deploy',
+      },
+    ],
+  },
 
   tenderly: {
     project: 'template-ethereum-contracts',

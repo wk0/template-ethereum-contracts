@@ -1556,6 +1556,29 @@
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
+"@uniswap/lib@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@uniswap/lib/-/lib-1.1.1.tgz#0afd29601846c16e5d082866cbb24a9e0758e6bc"
+  integrity sha512-2yK7sLpKIT91TiS5sewHtOa7YuM8IuBXVl4GZv2jZFys4D2sY7K5vZh6MqD25TPA95Od+0YzCVq6cTF2IKrOmg==
+
+"@uniswap/v2-core@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.0.tgz#e0fab91a7d53e8cafb5326ae4ca18351116b0844"
+  integrity sha512-BJiXrBGnN8mti7saW49MXwxDBRFiWemGetE58q8zgfnPPzQKq55ADltEILqOt6VFZ22kVeVKbF8gVd8aY3l7pA==
+
+"@uniswap/v2-core@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.1.tgz#af8f508bf183204779938969e2e54043e147d425"
+  integrity sha512-MtybtkUPSyysqLY2U210NBDeCHX+ltHt3oADGdjqoThZaFRDKwM6k1Nb3F0A3hk5hwuQvytFWhrWHOEq6nVJ8Q==
+
+"@uniswap/v2-periphery@^1.1.0-beta.0":
+  version "1.1.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@uniswap/v2-periphery/-/v2-periphery-1.1.0-beta.0.tgz#20a4ccfca22f1a45402303aedb5717b6918ebe6d"
+  integrity sha512-6dkwAMKza8nzqYiXEr2D86dgW3TTavUvCR0w2Tu33bAbM8Ah43LKAzH7oKKPRT5VJQaMi1jtkGs1E8JPor1n5g==
+  dependencies:
+    "@uniswap/lib" "1.1.1"
+    "@uniswap/v2-core" "1.0.0"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -4187,10 +4210,15 @@ hardhat-deploy-tenderly@^0.1.0:
     axios "^0.24.0"
     js-yaml "^4.1.0"
 
-hardhat-deploy@^0.9.26:
-  version "0.9.26"
-  resolved "https://registry.yarnpkg.com/hardhat-deploy/-/hardhat-deploy-0.9.26.tgz#84b85dbf67f317c8eca8b7cfeab27c051be6f023"
-  integrity sha512-hQsftZrmPkel8NrcVqHsJaXMv9xCVIaJdzn8TFa8Ow+nuvkt2NvIjsC1aN02SAL2nTI1Na3H1vfubWHSTbN2gA==
+hardhat-deploy-uniswap-v2@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/hardhat-deploy-uniswap-v2/-/hardhat-deploy-uniswap-v2-0.1.0.tgz#9ecc24a980e3e27510aa420fba621a047449aa19"
+  integrity sha512-TMSluafT6JNCtFhHVeftXkPHSKvjPilONl7a0ym18yQqXzSKvm5f+rwerXst1yba2dWhxJ7+AzhtkOgftUyesw==
+
+hardhat-deploy@^0.9.28:
+  version "0.9.28"
+  resolved "https://registry.yarnpkg.com/hardhat-deploy/-/hardhat-deploy-0.9.28.tgz#d9b06f788db4e154639f524fa30d75883fbff5c6"
+  integrity sha512-YwNGxjXEkbMdq6UNuarQE+jd/lvl+I0ik+JNIpnlOWtTpllORBO/khOV1aHHxSpVXXW/j+CNhHx09QOlxSmP3g==
   dependencies:
     "@ethersproject/abi" "^5.4.0"
     "@ethersproject/abstract-signer" "^5.4.1"
