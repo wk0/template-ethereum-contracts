@@ -6,13 +6,14 @@ import 'hardhat-gas-reporter';
 import '@typechain/hardhat';
 import 'solidity-coverage';
 import 'hardhat-deploy-tenderly';
+import '@matterlabs/hardhat-zksync-solc';
 import {node_url, accounts, addForkConfiguration} from './utils/network';
 
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: '0.8.9',
+        version: '0.8.11',
         settings: {
           optimizer: {
             enabled: true,
@@ -58,7 +59,26 @@ const config: HardhatUserConfig = {
       url: node_url('goerli'),
       accounts: accounts('goerli'),
     },
+    zktestnet: {
+      accounts: accounts('goerli'),
+      zksync: {
+        // feeToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+      },
+      url: 'https://zksync2-testnet.zksync.dev',
+    },
   }),
+  zksolc: {
+    version: '0.1.0',
+    compilerSource: 'docker',
+    settings: {
+      optimizer: {
+        enabled: true,
+      },
+      experimental: {
+        dockerImage: 'matterlabs/zksolc',
+      },
+    },
+  },
   paths: {
     sources: 'src',
   },
