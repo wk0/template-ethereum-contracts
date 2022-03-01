@@ -6,7 +6,12 @@ import 'hardhat-gas-reporter';
 import '@typechain/hardhat';
 import 'solidity-coverage';
 import 'hardhat-deploy-tenderly';
+import '@nomiclabs/hardhat-etherscan';
 import {node_url, accounts, addForkConfiguration} from './utils/network';
+
+// Metamask has had some conflicts with the default hardhat network id.
+const {HARDHAT_CHAIN_ID} = process.env;
+const hardhatChainId = HARDHAT_CHAIN_ID ? parseInt(HARDHAT_CHAIN_ID) : 1337;
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -24,10 +29,11 @@ const config: HardhatUserConfig = {
   },
   namedAccounts: {
     deployer: 0,
-    simpleERC20Beneficiary: 1,
+    beneficiary: 1,
   },
   networks: addForkConfiguration({
     hardhat: {
+      chainId: hardhatChainId,
       initialBaseFeePerGas: 0, // to fix : https://github.com/sc-forks/solidity-coverage/issues/652, see https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136
     },
     localhost: {
@@ -59,6 +65,9 @@ const config: HardhatUserConfig = {
       accounts: accounts('goerli'),
     },
   }),
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
   paths: {
     sources: 'src',
   },
