@@ -3,7 +3,7 @@ import 'dotenv/config';
 import {assert, expect} from './chai-setup';
 import {ethers} from 'hardhat';
 
-const {NOT_AN_ENV_VAR, ETH_NODE_URI_MAINNET, ETH_NODE_URI_GOERLI, MNEMONIC, COINMARKETCAP_API_KEY, ETHERSCAN_API_KEY} =
+const {NOT_AN_ENV_VAR, ETH_NODE_URI_MAINNET, ETH_NODE_URI_KOVAN, MNEMONIC, COINMARKETCAP_API_KEY, ETHERSCAN_API_KEY} =
   process.env;
 
 describe('Tests themselves work', function () {
@@ -32,16 +32,16 @@ describe('Is Env file correctly configured', function () {
     });
   });
 
-  describe('goerli node', async function () {
-    it('has ETH_NODE_URI_GOERLI', async function () {
-      expect(ETH_NODE_URI_GOERLI, 'did you add ETH_NODE_URI_GOERLI to .env?').to.not.be.undefined;
+  describe('kovan node', async function () {
+    it('has ETH_NODE_URI_KOVAN', async function () {
+      expect(ETH_NODE_URI_KOVAN, 'did you add ETH_NODE_URI_KOVAN to .env?').to.not.be.undefined;
     });
 
-    it('has usable goerli provider', async function () {
-      expect(ETH_NODE_URI_GOERLI, 'is ETH_NODE_URI_GOERLI the full alchemy http url?').to.include(
-        'https://eth-goerli.alchemyapi.io/v2/'
+    it('has usable kovan provider', async function () {
+      expect(ETH_NODE_URI_KOVAN, 'is ETH_NODE_URI_KOVAN the full alchemy http url?').to.include(
+        'https://eth-kovan.alchemyapi.io/v2/'
       );
-      expect(ETH_NODE_URI_GOERLI?.length, 'did you add the API key at the end of the URL?').to.equal(68);
+      expect(ETH_NODE_URI_KOVAN?.length, 'did you add the API key at the end of the URL?').to.equal(67);
     });
   });
 
