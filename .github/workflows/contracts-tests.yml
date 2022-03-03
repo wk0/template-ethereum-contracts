@@ -35,4 +35,4 @@ jobs:
         run: yarn contracts:compile
 
       - name: Test
-        run: yarn contracts:test
+        run: yarn contracts:test:ci
