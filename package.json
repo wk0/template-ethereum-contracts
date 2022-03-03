@@ -13,6 +13,7 @@
     "contracts": "yarn workspace contracts dev",
     "contracts:compile": "yarn workspace contracts compile",
     "contracts:void:deploy": "yarn workspace contracts void:deploy",
-    "contracts:test": "yarn workspace contracts test"
+    "contracts:test": "yarn workspace contracts test",
+    "contracts:test:ci": "yarn workspace contracts test:ci"
   }
 }
