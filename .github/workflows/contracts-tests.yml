@@ -31,11 +31,8 @@ jobs:
       - name: Installing dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Linting
-        run: yarn lint
+      - name: Compile
+        run: yarn contracts:compile
 
-      - name: Formatting
-        run: yarn format
-
-      - name: Running tests
-        run: yarn test
+      - name: Test
+        run: yarn contracts:test
